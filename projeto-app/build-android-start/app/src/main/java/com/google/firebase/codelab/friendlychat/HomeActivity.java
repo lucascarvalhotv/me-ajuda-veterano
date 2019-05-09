@@ -17,6 +17,9 @@ public class HomeActivity extends AppCompatActivity {
     private TextView mTextMessage;
     private TextView textName;
 
+    // Image
+    private String mPhotoUrl;
+
     // Firebase instance variables
     private FirebaseAuth mFirebaseAuth;
     private FirebaseUser mFirebaseUser;
