@@ -3,6 +3,8 @@ package com.google.firebase.codelab.friendlychat;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.annotation.NonNull;
 import android.view.MenuItem;
@@ -34,17 +36,18 @@ public class HomeActivity extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
+
                     return true;
                 case R.id.navigation_perfil:
                     mFirebaseAuth = FirebaseAuth.getInstance();
                     mFirebaseUser = mFirebaseAuth.getCurrentUser();
-                    if (mFirebaseUser == null) {
+                    /*if (mFirebaseUser == null) {
                         textName.setText("Usuário não encontrado");
                     } else {
                         textName.setText(mFirebaseUser.getDisplayName());
                         if (mFirebaseUser.getPhotoUrl() != null)
                             mPhotoUrl = mFirebaseUser.getPhotoUrl().toString();
-                    }
+                    }*/
                     return true;
                 case R.id.navigation_chat:
                     startActivity(new Intent(HomeActivity.this, MainActivity.class));
@@ -60,7 +63,6 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
         BottomNavigationView navView = findViewById(R.id.nav_view);
         mTextMessage = findViewById(R.id.message);
-        textName = findViewById(R.id.textName);
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         // Initialize Firebase Auth
@@ -73,5 +75,7 @@ public class HomeActivity extends AppCompatActivity {
             return;
         }
     }
+
+
 
 }
