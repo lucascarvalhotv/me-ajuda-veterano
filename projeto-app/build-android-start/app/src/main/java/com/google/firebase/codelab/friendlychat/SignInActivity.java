@@ -21,6 +21,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.google.android.gms.auth.api.Auth;
@@ -50,10 +51,21 @@ public class SignInActivity extends AppCompatActivity implements
     // Firebase instance variables
     private FirebaseAuth mFirebaseAuth;
 
+    private Button button2;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
+
+        button2 =  (Button) findViewById(R.id.button2);
+        button2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openHome();
+            }
+        });
+
 
         mFirebaseAuth = FirebaseAuth.getInstance();
 
@@ -76,8 +88,14 @@ public class SignInActivity extends AppCompatActivity implements
         // Initialize FirebaseAuth
     }
 
+    public void openHome(){
+        System.out.println("4");
+        startActivity(new Intent(SignInActivity.this, HomeActivity.class));
+    }
+
     @Override
     public void onClick(View v) {
+        System.out.println("1");
         switch (v.getId()) {
             case R.id.sign_in_button:
                 signIn();
@@ -86,6 +104,7 @@ public class SignInActivity extends AppCompatActivity implements
     }
 
     private void signIn() {
+        System.out.println("2");
         Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
@@ -93,6 +112,8 @@ public class SignInActivity extends AppCompatActivity implements
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+
+        System.out.println("3");
 
         // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
         if (requestCode == RC_SIGN_IN) {
@@ -140,3 +161,4 @@ public class SignInActivity extends AppCompatActivity implements
         Toast.makeText(this, "Google Play Services error.", Toast.LENGTH_SHORT).show();
     }
 }
+
