@@ -1,20 +1,32 @@
 package com.furb.meajudaveterano;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.media.Image;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
+
+import java.io.IOException;
 
 public class PerfilFragment extends Fragment {
 
     private Button buttonSair;
+    private TextView mTextNome;
+    private TextView mTextEmail;
+    private ImageView mImageViewFoto;
 
     @Nullable
     @Override
@@ -22,6 +34,9 @@ public class PerfilFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_perfil,null);
         buttonSair = view.findViewById(R.id.buttonSair);
+        mTextNome = view.findViewById(R.id.textViewNome);
+        mTextEmail = view.findViewById(R.id.textViewEmail);
+        mImageViewFoto = view.findViewById(R.id.imageViewFoto);
 
         buttonSair.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -29,6 +44,19 @@ public class PerfilFragment extends Fragment {
                 logout();
             }
         });
+
+        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+        mTextNome.setText(firebaseAuth.getCurrentUser().getDisplayName());
+        mTextEmail.setText(firebaseAuth.getCurrentUser().getEmail());
+
+        /*Bitmap bitmap = null;
+        try {
+            bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(),
+                    firebaseAuth.getCurrentUser().getPhotoUrl());
+            mImageViewFoto.setImageDrawable(new BitmapDrawable(bitmap));
+        } catch (IOException e) {
+            Log.e("Error", e.getLocalizedMessage());
+        }*/
 
         return view;
     }

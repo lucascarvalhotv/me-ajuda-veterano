@@ -2,10 +2,13 @@ package com.furb.meajudaveterano;
 
 public class Usuario {
 
-    private final String uuid;
-    private final String nome;
-    private final String profileUrl;
-    private final String email;
+    private String uuid;
+    private String nome;
+    private String profileUrl;
+    private String email;
+
+    public Usuario() {
+    }
 
     public Usuario(String uuid, String nome, String profileUrl, String email) {
         this.uuid = uuid;
