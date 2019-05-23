@@ -42,12 +42,6 @@ public class ChatActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        /*
-        ImageView imageViewMessage = viewHolder.itemView.findViewById(R.id.imageViewMessageUser);
-            Picasso.get()
-                    .load(usuario.getProfileUrl())
-                    .into(imageViewMessage);
-         */
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
 
