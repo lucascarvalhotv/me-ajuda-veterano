@@ -1,5 +1,6 @@
 package com.furb.meajudaveterano;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
@@ -9,6 +10,8 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 public class MainActivity extends AppCompatActivity
         implements BottomNavigationView.OnNavigationItemSelectedListener {
 
@@ -17,10 +20,21 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        verifyAuthentication();
+
         BottomNavigationView navView = findViewById(R.id.nav_view);
         navView.setOnNavigationItemSelectedListener(this);
 
         loadFragment(new HomeFragment());
+    }
+
+    private void verifyAuthentication() {
+        if (FirebaseAuth.getInstance().getUid() == null){
+            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK |
+                    Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+        }
     }
 
     private boolean loadFragment(Fragment fragment) {
@@ -43,7 +57,6 @@ public class MainActivity extends AppCompatActivity
 
         switch (menuItem.getItemId()) {
             case R.id.navigation_home:
-                Log.i("TESTE", "home");
                 fragment = new HomeFragment();
                 break;
             case R.id.navigation_perfil:
