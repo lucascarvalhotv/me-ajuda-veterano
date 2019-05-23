@@ -8,4 +8,11 @@
     <string name="infoNome">Informe seu nome</string>
     <string name="cadastrar">Cadastrar</string>
     <string name="foto">Foto</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="perfil">Perfil</string>
+    <string name="title_perfil">Perfil</string>
+    <string name="title_mensagens">Mensagens</string>
 </resources>
