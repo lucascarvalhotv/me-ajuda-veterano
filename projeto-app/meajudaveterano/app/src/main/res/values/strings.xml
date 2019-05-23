@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">meajudaveterano</string>
+    <string name="entrar">Entrar</string>
+    <string name="signIn">Não possui uma conta? Crie aqui!</string>
+    <string name="criarConta">Não possui uma conta? Crie aqui!</string>
+    <string name="infoSenha">Informe sua senha</string>
+    <string name="infoEmail">Informe seu e-mail</string>
+    <string name="infoNome">Informe seu nome</string>
+    <string name="cadastrar">Cadastrar</string>
+    <string name="foto">Foto</string>
+</resources>

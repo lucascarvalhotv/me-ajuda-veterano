@@ -1,0 +1,155 @@
+package com.furb.meajudaveterano;
+
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
+import android.provider.MediaStore;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthException;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+
+import java.io.IOException;
+import java.util.UUID;
+
+public class SigninActivity extends AppCompatActivity {
+
+    private EditText mEditUsername;
+    private EditText mEditEmail;
+    private EditText mEditPassword;
+    private Button mButtonCadastrar;
+    private Button mButtonFoto;
+    private Uri mSelectedUri;
+    private ImageView mImageViewFoto;
+
+    // Dependências Firebase
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_signin);
+
+        mEditUsername = findViewById(R.id.editUserName);
+        mEditEmail = findViewById(R.id.editEmail);
+        mEditPassword = findViewById(R.id.editPassword);
+        mButtonCadastrar = findViewById(R.id.buttonCadastrar);
+        mButtonFoto = findViewById(R.id.buttonSelectedPhoto);
+        mImageViewFoto = findViewById(R.id.imageViewFoto);
+
+        mButtonCadastrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                createUser();
+            }
+        });
+
+        mButtonFoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                selectFoto();
+            }
+        });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        // requestCode == 0 : requisição de foto
+        if (requestCode == 0) {
+            mSelectedUri = data.getData();
+            Bitmap bitmap = null;
+            try {
+                bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), mSelectedUri);
+                mImageViewFoto.setImageDrawable(new BitmapDrawable(bitmap));
+                mButtonFoto.setAlpha(0);
+            } catch (IOException e) {
+                Log.e("Error", e.getLocalizedMessage());
+            }
+
+
+        }
+    }
+
+    private void createUser() {
+        String name = mEditUsername.getText().toString();
+        String email = mEditEmail.getText().toString();
+        String password = mEditPassword.getText().toString();
+
+        if (name == null || name.isEmpty() ||
+                email == null || email.isEmpty() ||
+                password == null || password.isEmpty()) {
+            Toast.makeText(this, "Nome, e-mail e senha devem ser informados!",
+                    Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            Log.i("Teste", task.getResult().getUser().getUid());
+
+                            saveUserOnFirebase();
+                        }
+
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.e("Teste", e.getMessage());
+                    }
+                });
+    }
+
+    private void selectFoto() {
+        Intent intent = new Intent(Intent.ACTION_PICK);
+        intent.setType("image/*");
+        startActivityForResult(intent, 0);
+    }
+
+    private void saveUserOnFirebase() {
+        String filename = UUID.randomUUID().toString();
+        final StorageReference ref = FirebaseStorage.getInstance().getReference("/images/" + filename);
+        ref.putFile(mSelectedUri)
+                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        ref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                            @Override
+                            public void onSuccess(Uri uri) {
+                                Log.i("Teste", uri.toString());
+                            }
+                        });
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.e("Teste", e.getMessage());
+                    }
+                });
+
+    }
+}
