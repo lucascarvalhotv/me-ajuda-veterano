@@ -24,6 +24,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthException;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -139,7 +141,27 @@ public class SigninActivity extends AppCompatActivity {
                         ref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                             @Override
                             public void onSuccess(Uri uri) {
-                                Log.i("Teste", uri.toString());
+                                String uid = FirebaseAuth.getInstance().getUid();
+                                String userName = mEditUsername.getText().toString();
+                                String profileUrl = uri.toString();
+                                String email = mEditEmail.getText().toString();
+
+                                Usuario usuario = new Usuario(uid, userName, profileUrl, email);
+
+                                FirebaseFirestore.getInstance().collection("usuario")
+                                        .add(usuario)
+                                        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                            @Override
+                                            public void onSuccess(DocumentReference documentReference) {
+                                                Log.i("Teste", documentReference.getId());
+                                            }
+                                        })
+                                        .addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(@NonNull Exception e) {
+                                                Log.i("Teste", e.getMessage());
+                                            }
+                                        });
                             }
                         });
                     }
