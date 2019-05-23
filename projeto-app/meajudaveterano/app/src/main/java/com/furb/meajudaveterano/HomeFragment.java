@@ -1,6 +1,9 @@
 package com.furb.meajudaveterano;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -22,6 +25,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.squareup.picasso.Picasso;
 import com.xwray.groupie.GroupAdapter;
 import com.xwray.groupie.Item;
+import com.xwray.groupie.OnItemClickListener;
 import com.xwray.groupie.ViewHolder;
 
 import java.util.List;
@@ -40,6 +44,18 @@ public class HomeFragment extends Fragment {
         groupAdapter = new GroupAdapter();
         rv.setAdapter(groupAdapter);
         rv.setLayoutManager(new LinearLayoutManager(view.getContext()));
+
+        groupAdapter.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(@NonNull Item item, @NonNull View view) {
+                Intent intent = new Intent(view.getContext(), ChatActivity.class);
+
+                UserItem userItem = (UserItem) item;
+                intent.putExtra("usuario", userItem.usuario);
+
+                startActivity(intent);
+            }
+        });
 
         return view;
     }
@@ -89,5 +105,6 @@ public class HomeFragment extends Fragment {
         public int getLayout() {
             return R.layout.item_user;
         }
+
     }
 }

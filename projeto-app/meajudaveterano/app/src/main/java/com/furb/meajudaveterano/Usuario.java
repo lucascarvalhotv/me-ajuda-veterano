@@ -1,6 +1,9 @@
 package com.furb.meajudaveterano;
 
-public class Usuario {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class Usuario implements Parcelable {
 
     private String uuid;
     private String nome;
@@ -17,6 +20,25 @@ public class Usuario {
         this.email = email;
     }
 
+    protected Usuario(Parcel in) {
+        uuid = in.readString();
+        nome = in.readString();
+        profileUrl = in.readString();
+        email = in.readString();
+    }
+
+    public static final Creator<Usuario> CREATOR = new Creator<Usuario>() {
+        @Override
+        public Usuario createFromParcel(Parcel in) {
+            return new Usuario(in);
+        }
+
+        @Override
+        public Usuario[] newArray(int size) {
+            return new Usuario[size];
+        }
+    };
+
     public String getUuid() {
         return uuid;
     }
@@ -31,5 +53,18 @@ public class Usuario {
 
     public String getEmail() {
         return email;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(uuid);
+        dest.writeString(nome);
+        dest.writeString(profileUrl);
+        dest.writeString(email);
     }
 }

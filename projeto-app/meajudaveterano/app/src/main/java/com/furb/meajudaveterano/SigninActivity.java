@@ -147,10 +147,11 @@ public class SigninActivity extends AppCompatActivity {
                                 Usuario usuario = new Usuario(uid, userName, profileUrl, email);
 
                                 FirebaseFirestore.getInstance().collection("usuario")
-                                        .add(usuario)
-                                        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                        .document(uid)
+                                        .set(usuario)
+                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
                                             @Override
-                                            public void onSuccess(DocumentReference documentReference) {
+                                            public void onSuccess(Void aVoid) {
                                                 Log.i("Teste", "Usuário criado com sucesso");
                                                 Intent intent = new Intent(
                                                         SigninActivity.this, MainActivity.class);
