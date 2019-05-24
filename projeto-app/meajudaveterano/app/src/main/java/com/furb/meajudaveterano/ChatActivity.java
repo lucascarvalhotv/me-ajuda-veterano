@@ -39,6 +39,7 @@ public class ChatActivity extends AppCompatActivity {
     private Usuario usuario;
     private Usuario me;
     private TextView editTextChat;
+    private static final String TAG = "CHAT_ACTIVITY";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,7 +91,6 @@ public class ChatActivity extends AppCompatActivity {
                         @Override
                         public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
                             List<DocumentChange> documentChanges = queryDocumentSnapshots.getDocumentChanges();
-                            Log.i("mano?", "sei la");
 
                             if (documentChanges != null) {
                                 for (DocumentChange doc: documentChanges) {
@@ -110,11 +110,11 @@ public class ChatActivity extends AppCompatActivity {
         String text = editTextChat.getText().toString();
         editTextChat.setText(null);
 
-        String fromUid = FirebaseAuth.getInstance().getUid();
-        String toUid = usuario.getUuid();
+        final String fromUid = FirebaseAuth.getInstance().getUid();
+        final String toUid = usuario.getUuid();
         long timestamp = System.currentTimeMillis();
 
-        Message message = new Message();
+        final Message message = new Message();
         message.setFromId(fromUid);
         message.setToId(toUid);
         message.setTimestamp(timestamp);
@@ -128,13 +128,26 @@ public class ChatActivity extends AppCompatActivity {
                     .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                         @Override
                         public void onSuccess(DocumentReference documentReference) {
-                            Log.d("ENVIAR", documentReference.getId());
+                            Log.d(TAG, documentReference.getId());
+
+                            Contact contact = new Contact();
+                            contact.setUuid(toUid);
+                            contact.setUsername(usuario.getNome());
+                            contact.setPhotoUrl(usuario.getProfileUrl());
+                            contact.setTimestamp(message.getTimestamp());
+                            contact.setLastMessage(message.getText());
+
+                            FirebaseFirestore.getInstance().collection("/last-messages")
+                                    .document(fromUid)
+                                    .collection("contact")
+                                    .document(toUid)
+                                    .set(contact);
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
-                            Log.e("ENVIAR_ERRO", e.getMessage(), e);
+                            Log.e(TAG, e.getMessage(), e);
                         }
                     });
 
@@ -145,13 +158,27 @@ public class ChatActivity extends AppCompatActivity {
                     .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                         @Override
                         public void onSuccess(DocumentReference documentReference) {
-                            Log.d("ENVIAR", documentReference.getId());
+                            Log.d(TAG, documentReference.getId());
+
+                            Contact contact = new Contact();
+                            contact.setUuid(fromUid);
+                            contact.setUsername(me.getNome());
+                            contact.setPhotoUrl(me.getProfileUrl());
+                            contact.setTimestamp(message.getTimestamp());
+                            contact.setLastMessage(message.getText());
+
+                            FirebaseFirestore.getInstance().collection("/last-messages")
+                                    .document(toUid)
+                                    .collection("contact")
+                                    .document(fromUid)
+                                    .set(contact);
+
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
-                            Log.e("ENVIAR_ERRO", e.getMessage(), e);
+                            Log.e(TAG, e.getMessage(), e);
                         }
                     });
         }

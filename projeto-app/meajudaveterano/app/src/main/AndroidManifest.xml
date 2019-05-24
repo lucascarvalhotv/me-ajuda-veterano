@@ -16,7 +16,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MensagensActivity" />
         <activity android:name=".SigninActivity" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".ChatActivity">
