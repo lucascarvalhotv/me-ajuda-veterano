@@ -103,6 +103,12 @@ public class SigninActivity extends AppCompatActivity {
             return;
         }
 
+        if (password.length() < 6) {
+            Toast.makeText(this, "A senha deve conter no mínimo 6 caracteres!",
+                    Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override

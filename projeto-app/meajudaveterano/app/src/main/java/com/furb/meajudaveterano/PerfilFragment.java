@@ -52,7 +52,6 @@ public class PerfilFragment extends Fragment {
             }
         });
 
-        Log.i("aaaaa", FirebaseAuth.getInstance().getUid());
         FirebaseFirestore.getInstance().collection("/usuario")
                 .document(FirebaseAuth.getInstance().getUid())
                 .get()
