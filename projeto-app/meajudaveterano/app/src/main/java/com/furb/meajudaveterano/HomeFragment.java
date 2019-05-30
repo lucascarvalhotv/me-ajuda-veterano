@@ -72,7 +72,7 @@ public class HomeFragment extends Fragment {
 
                         List<DocumentSnapshot> documents = queryDocumentSnapshots.getDocuments();
                         for (DocumentSnapshot document : documents) {
-                        Usuario usuario = document.toObject(Usuario.class);
+                            Usuario usuario = document.toObject(Usuario.class);
                             groupAdapter.add(new UserItem(usuario));
                         }
                     }

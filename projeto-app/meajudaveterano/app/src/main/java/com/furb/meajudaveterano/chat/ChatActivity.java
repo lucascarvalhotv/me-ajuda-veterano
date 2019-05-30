@@ -1,8 +1,8 @@
 package com.furb.meajudaveterano.chat;
 
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -34,11 +34,11 @@ import javax.annotation.Nullable;
 
 public class ChatActivity extends AppCompatActivity {
 
+    private static final String TAG = "CHAT_ACTIVITY";
     private GroupAdapter groupAdapter;
     private Usuario usuario;
     private Usuario me;
     private TextView editTextChat;
-    private static final String TAG = "CHAT_ACTIVITY";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,7 +92,7 @@ public class ChatActivity extends AppCompatActivity {
                             List<DocumentChange> documentChanges = queryDocumentSnapshots.getDocumentChanges();
 
                             if (documentChanges != null) {
-                                for (DocumentChange doc: documentChanges) {
+                                for (DocumentChange doc : documentChanges) {
                                     if (doc.getType() == DocumentChange.Type.ADDED) {
                                         Message message = doc.getDocument().toObject(Message.class);
                                         groupAdapter.add(new MessageItem(message));

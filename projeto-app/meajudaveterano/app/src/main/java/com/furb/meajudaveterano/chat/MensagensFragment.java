@@ -32,8 +32,8 @@ import java.util.List;
 
 public class MensagensFragment extends Fragment {
 
-    private GroupAdapter groupAdapter;
     private static final String TAG = "MENSAGENS_FRAGMENT";
+    private GroupAdapter groupAdapter;
     private Usuario usuario;
 
     @Nullable
@@ -82,7 +82,7 @@ public class MensagensFragment extends Fragment {
                     public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
                         List<DocumentChange> documentChanges = queryDocumentSnapshots.getDocumentChanges();
                         if (documentChanges != null) {
-                            for (DocumentChange doc: documentChanges) {
+                            for (DocumentChange doc : documentChanges) {
                                 if (doc.getType() == DocumentChange.Type.ADDED) {
                                     Contact contact = doc.getDocument().toObject(Contact.class);
                                     groupAdapter.add(new ContactItem(contact));
