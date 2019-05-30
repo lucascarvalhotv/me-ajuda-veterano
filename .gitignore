@@ -11,3 +11,9 @@
 /build
 /captures
 .externalNativeBuild
+projeto-app/build-android-start/app/gradlew
+projeto-app/build-android-start/app/build.gradle
+projeto-app/build-android-start/app/gradle/wrapper/gradle-wrapper.jar
+projeto-app/build-android-start/app/gradle/wrapper/gradle-wrapper.properties
+projeto-app/build-android-start/app/gradlew.bat
+projeto-app/build-android-start/app/build.gradle

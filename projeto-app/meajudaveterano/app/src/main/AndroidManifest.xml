@@ -16,9 +16,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SigninActivity" />
-        <activity android:name=".LoginActivity" />
-        <activity android:name=".ChatActivity">
+        <activity android:name=".login.SigninActivity" />
+        <activity android:name=".login.LoginActivity" />
+        <activity android:name=".chat.ChatActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />

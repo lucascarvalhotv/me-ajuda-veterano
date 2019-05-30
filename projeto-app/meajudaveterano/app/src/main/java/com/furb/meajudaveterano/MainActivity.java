@@ -6,10 +6,11 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.annotation.NonNull;
-import android.util.Log;
 import android.view.MenuItem;
-import android.widget.TextView;
 
+import com.furb.meajudaveterano.chat.MensagensFragment;
+import com.furb.meajudaveterano.login.LoginActivity;
+import com.furb.meajudaveterano.user.PerfilFragment;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity

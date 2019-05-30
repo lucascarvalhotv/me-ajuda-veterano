@@ -56,8 +56,11 @@ dependencies {
     implementation 'com.google.firebase:firebase-storage'
     implementation 'com.google.firebase:firebase-auth'
 
+    implementation 'com.github.lecho:hellocharts-library:1.5.8@aar' // pie-chart
+
     // Firebase UI
     implementation 'com.firebaseui:firebase-ui-database:3.3.1'
+
 
     // Testing dependencies
     androidTestImplementation 'junit:junit:4.12'

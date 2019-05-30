@@ -1,7 +1,10 @@
-package com.furb.meajudaveterano;
+package com.furb.meajudaveterano.user;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import java.util.ArrayList;
+
+import com.google.common.collect.ArrayListMultimap;
 
 public class Usuario implements Parcelable {
 
@@ -9,6 +12,7 @@ public class Usuario implements Parcelable {
     private String nome;
     private String profileUrl;
     private String email;
+    private ArrayList<Materia> materias;
 
     public Usuario() {
     }
@@ -18,6 +22,7 @@ public class Usuario implements Parcelable {
         this.nome = nome;
         this.profileUrl = profileUrl;
         this.email = email;
+        this.materias = new ArrayList();
     }
 
     protected Usuario(Parcel in) {
@@ -67,4 +72,19 @@ public class Usuario implements Parcelable {
         dest.writeString(profileUrl);
         dest.writeString(email);
     }
+
+    public void addMateria(Materia novaMateria) {
+        boolean find = false;
+        for (Materia materia: materias) {
+            if (materia.getName().equals(novaMateria.getName())) {
+                materia = novaMateria;
+                find = true;
+            }
+        }
+        if (!find) {
+            this.materias.add(novaMateria);
+        }
+    }
+
+
 }

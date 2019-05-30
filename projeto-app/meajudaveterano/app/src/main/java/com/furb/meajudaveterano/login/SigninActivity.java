@@ -1,4 +1,4 @@
-package com.furb.meajudaveterano;
+package com.furb.meajudaveterano.login;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -16,13 +16,15 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.furb.meajudaveterano.MainActivity;
+import com.furb.meajudaveterano.R;
+import com.furb.meajudaveterano.user.Usuario;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;

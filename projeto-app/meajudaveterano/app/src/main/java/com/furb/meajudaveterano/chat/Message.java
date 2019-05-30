@@ -1,4 +1,4 @@
-package com.furb.meajudaveterano;
+package com.furb.meajudaveterano.chat;
 
 public class Message {
 
