@@ -2,8 +2,6 @@ package com.furb.meajudaveterano;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcel;
-import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -16,7 +14,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -73,7 +70,7 @@ public class HomeFragment extends Fragment {
 
                         List<DocumentSnapshot> documents = queryDocumentSnapshots.getDocuments();
                         for (DocumentSnapshot document : documents) {
-                        Usuario usuario = document.toObject(Usuario.class);
+                            Usuario usuario = document.toObject(Usuario.class);
                             groupAdapter.add(new UserItem(usuario));
                         }
                     }

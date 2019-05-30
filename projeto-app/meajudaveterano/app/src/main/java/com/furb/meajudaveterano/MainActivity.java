@@ -2,13 +2,11 @@ package com.furb.meajudaveterano;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
-import android.support.annotation.NonNull;
-import android.util.Log;
 import android.view.MenuItem;
-import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -29,7 +27,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void verifyAuthentication() {
-        if (FirebaseAuth.getInstance().getUid() == null){
+        if (FirebaseAuth.getInstance().getUid() == null) {
             Intent intent = new Intent(MainActivity.this, LoginActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK |
                     Intent.FLAG_ACTIVITY_NEW_TASK);

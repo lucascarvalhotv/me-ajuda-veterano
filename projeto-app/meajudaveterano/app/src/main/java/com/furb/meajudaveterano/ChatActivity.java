@@ -1,10 +1,8 @@
 package com.furb.meajudaveterano;
 
-import android.media.Image;
-import android.os.Parcelable;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -23,8 +21,6 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.google.firebase.storage.FirebaseStorage;
-import com.squareup.picasso.Picasso;
 import com.xwray.groupie.GroupAdapter;
 import com.xwray.groupie.Item;
 import com.xwray.groupie.ViewHolder;
@@ -35,11 +31,11 @@ import javax.annotation.Nullable;
 
 public class ChatActivity extends AppCompatActivity {
 
+    private static final String TAG = "CHAT_ACTIVITY";
     private GroupAdapter groupAdapter;
     private Usuario usuario;
     private Usuario me;
     private TextView editTextChat;
-    private static final String TAG = "CHAT_ACTIVITY";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,7 +89,7 @@ public class ChatActivity extends AppCompatActivity {
                             List<DocumentChange> documentChanges = queryDocumentSnapshots.getDocumentChanges();
 
                             if (documentChanges != null) {
-                                for (DocumentChange doc: documentChanges) {
+                                for (DocumentChange doc : documentChanges) {
                                     if (doc.getType() == DocumentChange.Type.ADDED) {
                                         Message message = doc.getDocument().toObject(Message.class);
                                         groupAdapter.add(new MessageItem(message));

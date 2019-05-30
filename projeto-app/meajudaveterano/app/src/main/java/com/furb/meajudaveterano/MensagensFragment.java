@@ -7,19 +7,14 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Adapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentChange;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
@@ -34,8 +29,8 @@ import java.util.List;
 
 public class MensagensFragment extends Fragment {
 
-    private GroupAdapter groupAdapter;
     private static final String TAG = "MENSAGENS_FRAGMENT";
+    private GroupAdapter groupAdapter;
     private Usuario usuario;
 
     @Nullable
@@ -84,7 +79,7 @@ public class MensagensFragment extends Fragment {
                     public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
                         List<DocumentChange> documentChanges = queryDocumentSnapshots.getDocumentChanges();
                         if (documentChanges != null) {
-                            for (DocumentChange doc: documentChanges) {
+                            for (DocumentChange doc : documentChanges) {
                                 if (doc.getType() == DocumentChange.Type.ADDED) {
                                     Contact contact = doc.getDocument().toObject(Contact.class);
                                     groupAdapter.add(new ContactItem(contact));

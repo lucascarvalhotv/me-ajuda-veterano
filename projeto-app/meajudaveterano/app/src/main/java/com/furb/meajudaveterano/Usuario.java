@@ -5,6 +5,17 @@ import android.os.Parcelable;
 
 public class Usuario implements Parcelable {
 
+    public static final Creator<Usuario> CREATOR = new Creator<Usuario>() {
+        @Override
+        public Usuario createFromParcel(Parcel in) {
+            return new Usuario(in);
+        }
+
+        @Override
+        public Usuario[] newArray(int size) {
+            return new Usuario[size];
+        }
+    };
     private String uuid;
     private String nome;
     private String profileUrl;
@@ -26,18 +37,6 @@ public class Usuario implements Parcelable {
         profileUrl = in.readString();
         email = in.readString();
     }
-
-    public static final Creator<Usuario> CREATOR = new Creator<Usuario>() {
-        @Override
-        public Usuario createFromParcel(Parcel in) {
-            return new Usuario(in);
-        }
-
-        @Override
-        public Usuario[] newArray(int size) {
-            return new Usuario[size];
-        }
-    };
 
     public String getUuid() {
         return uuid;
