@@ -1,4 +1,4 @@
-package com.furb.meajudaveterano;
+package com.furb.meajudaveterano.college;
 
 import android.os.Parcel;
 import android.os.Parcelable;

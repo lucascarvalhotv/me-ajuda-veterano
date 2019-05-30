@@ -1,9 +1,11 @@
 package com.furb.meajudaveterano;
 
-import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
+import com.furb.meajudaveterano.college.Curso;
+import com.furb.meajudaveterano.college.Disciplina;
+import com.furb.meajudaveterano.college.Instituicao;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.FirebaseFirestore;
