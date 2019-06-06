@@ -20,6 +20,9 @@ public class Disciplina implements Parcelable {
         }
     };
 
+    public Disciplina() {
+    }
+
     public Disciplina(String uuid, String nome) {
         this.uuid = uuid;
         this.nome = nome;

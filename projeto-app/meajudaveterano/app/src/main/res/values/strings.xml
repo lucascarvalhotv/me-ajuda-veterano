@@ -17,4 +17,7 @@
     <string name="title_mensagens">Mensagens</string>
     <string name="exit">Sair</string>
     <string name="edit">Editar</string>
+    <string name="load">Carregar</string>
+    <string name="app_label">Search</string>
+    <string name="search_hint">Search Me</string>
 </resources>

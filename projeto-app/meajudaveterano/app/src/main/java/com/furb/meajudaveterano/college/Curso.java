@@ -12,6 +12,9 @@ public class Curso implements Parcelable {
     private String nome;
     private List<Disciplina> disciplinas;
 
+    public Curso() {
+    }
+
     public Curso(String uuid, String nome, List<Disciplina> disciplinas) {
         this.uuid = uuid;
         this.nome = nome;
@@ -47,5 +50,29 @@ public class Curso implements Parcelable {
         dest.writeString(uuid);
         dest.writeString(nome);
         dest.writeList(disciplinas);
+    }
+
+    public String getUuid() {
+        return uuid;
+    }
+
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public List<Disciplina> getDisciplinas() {
+        return disciplinas;
+    }
+
+    public void setDisciplinas(List<Disciplina> disciplinas) {
+        this.disciplinas = disciplinas;
     }
 }

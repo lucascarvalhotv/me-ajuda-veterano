@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.furb.meajudaveterano.Loader;
 import com.furb.meajudaveterano.login.LoginActivity;
 import com.furb.meajudaveterano.R;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -31,15 +32,25 @@ public class PerfilFragment extends Fragment {
     private ImageView mImageViewFoto;
     private Usuario me;
 
+    private Button buttonLoad;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_perfil, null);
         buttonSair = view.findViewById(R.id.buttonSair);
-        mTextNome = view.findViewById(R.id.textViewNome);
-        mTextEmail = view.findViewById(R.id.textViewEmail);
+        mTextNome = view.findViewById(R.id.textViewName);
+        //mTextEmail = view.findViewById(R.id.textViewEmail);
         mImageViewFoto = view.findViewById(R.id.imageViewFoto);
+        buttonLoad = view.findViewById(R.id.button_load);
+
+        buttonLoad.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Loader.loadCurso();
+            }
+        });
 
         buttonSair.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,22 +59,25 @@ public class PerfilFragment extends Fragment {
             }
         });
 
-        FirebaseFirestore.getInstance().collection("/usuario")
-                .document(FirebaseAuth.getInstance().getUid())
-                .get()
-                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                    @Override
-                    public void onSuccess(DocumentSnapshot documentSnapshot) {
-                        me = documentSnapshot.toObject(Usuario.class);
-                        setInfo();
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.i(TAG, e.getMessage(), e);
-                    }
-                });
+        if (me == null) {
+            Log.i(TAG, "AAAAAAAAAAAAAAAAAAAAAAAAAA");
+            FirebaseFirestore.getInstance().collection("/usuario")
+                    .document(FirebaseAuth.getInstance().getUid())
+                    .get()
+                    .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                        @Override
+                        public void onSuccess(DocumentSnapshot documentSnapshot) {
+                            me = documentSnapshot.toObject(Usuario.class);
+                            setInfo();
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Log.i(TAG, e.getMessage(), e);
+                        }
+                    });
+        }
 
         return view;
     }
@@ -75,7 +89,7 @@ public class PerfilFragment extends Fragment {
                     .into(mImageViewFoto);
 
             mTextNome.setText(me.getNome());
-            mTextEmail.setText(me.getEmail());
+            //mTextEmail.setText(me.getEmail());
         } else {
             Log.i(TAG, "Falha ao carregar informações do usuário");
         }
