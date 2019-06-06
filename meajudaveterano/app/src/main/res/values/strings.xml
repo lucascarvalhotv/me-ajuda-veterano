@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">meajudaveterano</string>
+    <string name="entrar">Entrar</string>
+    <string name="signIn">Não possui uma conta? Crie aqui!</string>
+    <string name="criarConta">Não possui uma conta? Crie aqui!</string>
+    <string name="infoSenha">Informe sua senha</string>
+    <string name="infoEmail">Informe seu e-mail</string>
+    <string name="infoNome">Informe seu nome</string>
+    <string name="cadastrar">Cadastrar</string>
+    <string name="foto">Foto</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="perfil">Perfil</string>
+    <string name="title_perfil">Perfil</string>
+    <string name="title_mensagens">Mensagens</string>
+    <string name="exit">Sair</string>
+    <string name="edit">Editar</string>
+    <string name="load">Carregar</string>
+    <string name="app_label">Search</string>
+    <string name="search_hint">Search Me</string>
+</resources>
