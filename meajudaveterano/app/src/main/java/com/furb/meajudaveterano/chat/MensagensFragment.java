@@ -68,7 +68,6 @@ public class MensagensFragment extends Fragment {
         Intent intent = new Intent(getContext(), ChatActivity.class);
         intent.putExtra("usuario", usuario);
         startActivity(intent);
-
     }
 
     private void fetchLastMessage() {
