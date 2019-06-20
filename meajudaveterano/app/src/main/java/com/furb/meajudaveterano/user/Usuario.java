@@ -22,6 +22,9 @@ public class Usuario implements Parcelable {
     private String profileUrl;
     private String email;
 
+    private String college;
+    private String curso;
+
     public Usuario() {
     }
 
@@ -68,4 +71,31 @@ public class Usuario implements Parcelable {
         dest.writeString(email);
     }
 
+    public String getCollege() {
+        return college;
+    }
+
+    public String getCurso() {
+        return curso;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setProfileUrl(String profileUrl) {
+        this.profileUrl = profileUrl;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public void setCollege(String college) {
+        this.college = college;
+    }
+
+    public void setCurso(String curso) {
+        this.curso = curso;
+    }
 }
