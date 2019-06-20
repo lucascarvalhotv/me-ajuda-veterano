@@ -6,6 +6,9 @@
     <string name="infoSenha">Informe sua senha</string>
     <string name="infoEmail">Informe seu e-mail</string>
     <string name="infoNome">Informe seu nome</string>
+    <string name="infoSobrenome">Informe seu sobrenome</string>
+    <string name="infoCurso">Informe seu curso</string>
+    <string name="infoCollege">Informe sua instituição</string>
     <string name="cadastrar">Cadastrar</string>
     <string name="foto">Foto</string>
     <string name="title_activity_main">MainActivity</string>

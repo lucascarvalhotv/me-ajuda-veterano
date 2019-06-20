@@ -13,7 +13,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.furb.meajudaveterano.Loader;
 import com.furb.meajudaveterano.login.LoginActivity;
 import com.furb.meajudaveterano.R;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -26,13 +25,13 @@ import com.squareup.picasso.Picasso;
 public class PerfilFragment extends Fragment {
 
     private final static String TAG = "PERFIL_FRAGMENT";
+
     private Button buttonSair;
+    private Button buttonEditar;
     private TextView mTextNome;
-    private TextView mTextEmail;
+    // private TextView mTextEmail;
     private ImageView mImageViewFoto;
     private Usuario me;
-
-    private Button buttonLoad;
 
     @Nullable
     @Override
@@ -40,22 +39,21 @@ public class PerfilFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_perfil, null);
         buttonSair = view.findViewById(R.id.buttonSair);
+        buttonEditar = view.findViewById(R.id.buttonEditar);
         mTextNome = view.findViewById(R.id.textViewName);
-        //mTextEmail = view.findViewById(R.id.textViewEmail);
+        // mTextEmail = view.findViewById(R.id.textViewEmail);
         mImageViewFoto = view.findViewById(R.id.imageViewFoto);
-        buttonLoad = view.findViewById(R.id.button_load);
-
-        buttonLoad.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Loader.loadCurso();
-            }
-        });
 
         buttonSair.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 logout();
+            }
+        });
+        buttonEditar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openUsuarioEdit();
             }
         });
 
@@ -82,12 +80,15 @@ public class PerfilFragment extends Fragment {
         return view;
     }
 
+    private void openUsuarioEdit() {
+        Intent intent = new Intent(getContext(), UsuarioEditActivity.class);
+        intent.putExtra("usuario", this.me);
+        startActivity(intent);
+    }
+
     private void setInfo() {
         if (me != null) {
-            Picasso.get()
-                    .load(me.getProfileUrl())
-                    .into(mImageViewFoto);
-
+            Picasso.get().load(me.getProfileUrl()).into(mImageViewFoto);
             mTextNome.setText(me.getNome());
             //mTextEmail.setText(me.getEmail());
         } else {

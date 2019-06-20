@@ -117,8 +117,7 @@ public class SigninActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             Log.i("Teste", task.getResult().getUser().getUid());
-
-                            saveUserOnFirebase();
+                            saveUserOnFirebase(null);
                         }
 
                     }
@@ -137,7 +136,8 @@ public class SigninActivity extends AppCompatActivity {
         startActivityForResult(intent, 0);
     }
 
-    private void saveUserOnFirebase() {
+    // só passa um usuario para editar, se for add, passa null
+    public void saveUserOnFirebase(final Usuario userEdited) {
         String filename = UUID.randomUUID().toString();
         final StorageReference ref = FirebaseStorage.getInstance().getReference("/images/" + filename);
         ref.putFile(mSelectedUri)
@@ -147,12 +147,18 @@ public class SigninActivity extends AppCompatActivity {
                         ref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                             @Override
                             public void onSuccess(Uri uri) {
-                                String uid = FirebaseAuth.getInstance().getUid();
-                                String userName = mEditUsername.getText().toString();
-                                String profileUrl = uri.toString();
-                                String email = mEditEmail.getText().toString();
-
-                                Usuario usuario = new Usuario(uid, userName, profileUrl, email);
+                                String uid;
+                                Usuario usuario = new Usuario();
+                                if (userEdited != null) {
+                                    usuario = userEdited;
+                                    uid = userEdited.getUuid();
+                                } else {
+                                    String userName = mEditUsername.getText().toString();
+                                    String profileUrl = uri.toString();
+                                    String email = mEditEmail.getText().toString();
+                                    uid = FirebaseAuth.getInstance().getUid();
+                                    usuario = new Usuario(uid, userName, profileUrl, email);
+                                }
 
                                 FirebaseFirestore.getInstance().collection("usuario")
                                         .document(uid)
