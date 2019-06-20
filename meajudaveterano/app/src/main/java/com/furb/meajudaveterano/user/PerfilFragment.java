@@ -13,7 +13,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.furb.meajudaveterano.Loader;
 import com.furb.meajudaveterano.login.LoginActivity;
 import com.furb.meajudaveterano.R;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -45,12 +44,6 @@ public class PerfilFragment extends Fragment {
         mImageViewFoto = view.findViewById(R.id.imageViewFoto);
         buttonLoad = view.findViewById(R.id.button_load);
 
-        buttonLoad.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Loader.loadCurso();
-            }
-        });
 
         buttonSair.setOnClickListener(new View.OnClickListener() {
             @Override
