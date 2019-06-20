@@ -3,6 +3,7 @@ package com.furb.meajudaveterano;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -158,18 +159,26 @@ public class HomeFragment extends Fragment {
     private class UserItem extends Item<ViewHolder> {
 
         private final Usuario usuario;
+        private String disciplina;
+        private boolean disciplinaFeita;
 
-        private UserItem(Usuario usuario) {
+        private UserItem(Usuario usuario, String disciplina, boolean disciplinaFeita) {
             this.usuario = usuario;
+            this.disciplina = disciplina;
+            this.disciplinaFeita = disciplinaFeita;
         }
 
         @Override
         public void bind(@NonNull ViewHolder viewHolder, int position) {
             TextView textViewNomeUsuario = viewHolder.itemView.findViewById(R.id.textViewNomeUsuario);
+            TextView textViewDisciplina = viewHolder.itemView.findViewById(R.id.textViewDisciplina);
             ImageView imageViewFoto = viewHolder.itemView.findViewById(R.id.imageViewFoto);
 
             textViewNomeUsuario.setText(usuario.getNome());
+            textViewDisciplina.setText(disciplina + " - " +
+                    (disciplinaFeita ? "Concluída" : "Cursando"));
 
+            viewHolder.itemView.setBackgroundColor(Color.parseColor(disciplinaFeita ? "#00FF00" : "#FFFF00"));
             Picasso.get()
                     .load(usuario.getProfileUrl())
                     .into(imageViewFoto);
@@ -185,8 +194,18 @@ public class HomeFragment extends Fragment {
     private void findUsers(String query){
         groupAdapter.clear();
         for (Usuario usuario: listaUsuarios) {
-            if (usuario.getNome().toLowerCase().contains(query.toLowerCase()))
-                groupAdapter.add(new UserItem(usuario));
+            Log.i("USUARIO", usuario.getNome());
+            for (String disciplinaFazendo:usuario.getDisciplinaFazendo()) {
+                Log.i("disciplinaFazendo", disciplinaFazendo);
+                if (disciplinaFazendo.toLowerCase().contains(query.toLowerCase()))
+                    groupAdapter.add(new UserItem(usuario, disciplinaFazendo, false));
+            }
+
+            for (String disciplinaFeita:usuario.getDisciplinaFeita()) {
+                Log.i("disciplinaFeita", disciplinaFeita);
+                if (disciplinaFeita.toLowerCase().contains(query.toLowerCase()))
+                    groupAdapter.add(new UserItem(usuario, disciplinaFeita, true));
+            }
         }
 
     }

@@ -2,6 +2,9 @@ package com.furb.meajudaveterano.user;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.util.Log;
+
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Usuario implements Parcelable {
@@ -24,6 +27,8 @@ public class Usuario implements Parcelable {
     private String telefone;
     private String college;
     private String curso;
+    private ArrayList<String> disciplinaFazendo = new ArrayList<String>();;
+    private ArrayList<String> disciplinaFeita = new ArrayList<String>();;
 
     public Usuario() {
     }
@@ -34,6 +39,8 @@ public class Usuario implements Parcelable {
         this.profileUrl = profileUrl;
         this.email = email;
         this.telefone = telefone;
+        disciplinaFazendo = new ArrayList<String>();
+        disciplinaFeita = new ArrayList<String>();
     }
 
     protected Usuario(Parcel in) {
@@ -42,6 +49,8 @@ public class Usuario implements Parcelable {
         profileUrl = in.readString();
         email = in.readString();
         telefone = in.readString();
+        disciplinaFazendo = in.readArrayList(ArrayList.class.getClassLoader());
+        disciplinaFeita = in.readArrayList(ArrayList.class.getClassLoader());
     }
 
     public String getUuid() {
@@ -108,5 +117,21 @@ public class Usuario implements Parcelable {
 
     public void setTelefone(String telefone) {
         this.telefone = telefone;
+    }
+
+    public ArrayList<String> getDisciplinaFazendo() {
+        return disciplinaFazendo;
+    }
+
+    public void setDisciplinaFazendo(ArrayList<String> disciplinaFazendo) {
+        this.disciplinaFazendo = disciplinaFazendo;
+    }
+
+    public ArrayList<String> getDisciplinaFeita() {
+        return disciplinaFeita;
+    }
+
+    public void setDisciplinaFeita(ArrayList<String> disciplinaFeita) {
+        this.disciplinaFeita = disciplinaFeita;
     }
 }
