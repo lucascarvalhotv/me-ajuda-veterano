@@ -21,18 +21,19 @@ public class Usuario implements Parcelable {
     private String nome;
     private String profileUrl;
     private String email;
-
+    private String telefone;
     private String college;
     private String curso;
 
     public Usuario() {
     }
 
-    public Usuario(String uuid, String nome, String profileUrl, String email) {
+    public Usuario(String uuid, String nome, String profileUrl, String email, String telefone) {
         this.uuid = uuid;
         this.nome = nome;
         this.profileUrl = profileUrl;
         this.email = email;
+        this.telefone = telefone;
     }
 
     protected Usuario(Parcel in) {
@@ -40,6 +41,7 @@ public class Usuario implements Parcelable {
         nome = in.readString();
         profileUrl = in.readString();
         email = in.readString();
+        telefone = in.readString();
     }
 
     public String getUuid() {
@@ -69,6 +71,7 @@ public class Usuario implements Parcelable {
         dest.writeString(nome);
         dest.writeString(profileUrl);
         dest.writeString(email);
+        dest.writeString(telefone);
     }
 
     public String getCollege() {
@@ -97,5 +100,13 @@ public class Usuario implements Parcelable {
 
     public void setCurso(String curso) {
         this.curso = curso;
+    }
+
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
     }
 }

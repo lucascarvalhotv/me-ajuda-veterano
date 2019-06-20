@@ -53,6 +53,7 @@ public class MensagensFragment extends Fragment {
                 usuario = new Usuario(contactItem.contact.getUuid(),
                         contactItem.contact.getUsername(),
                         contactItem.contact.getPhotoUrl(),
+                        "",
                         "");
                 openChat();
             }

@@ -46,19 +46,17 @@
     app:layout_constraintStart_toStartOf="@+id/editEmail"
     app:layout_constraintTop_toBottomOf="@+id/editEmail" />
 
-<Button
-    android:id="@+id/buttonCadastrar"
-    android:layout_width="0dp"
-    android:layout_height="50dp"
-    android:layout_marginStart="8dp"
-    android:layout_marginLeft="8dp"
-    android:layout_marginTop="32dp"
-    android:background="@android:color/holo_blue_dark"
-    android:textColor="@android:color/white"
-    android:text="@string/cadastrar"
-    app:layout_constraintEnd_toEndOf="@+id/editPassword"
-    app:layout_constraintStart_toStartOf="@+id/editPassword"
-    app:layout_constraintTop_toBottomOf="@+id/editPassword" />
+    <Button
+        android:id="@+id/buttonCadastrar"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="8dp"
+        android:background="@android:color/holo_blue_dark"
+        android:text="@string/cadastrar"
+        android:textColor="@android:color/white"
+        app:layout_constraintEnd_toEndOf="@+id/editTelefone"
+        app:layout_constraintStart_toStartOf="@+id/editTelefone"
+        app:layout_constraintTop_toBottomOf="@+id/editTelefone" />
 
     <Button
         android:id="@+id/buttonSelectedPhoto"
@@ -88,6 +86,18 @@
         app:layout_constraintStart_toStartOf="@+id/buttonSelectedPhoto"
         app:layout_constraintTop_toTopOf="@+id/buttonSelectedPhoto"
         />
+
+    <EditText
+        android:id="@+id/editTelefone"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:inputType="phone"
+        android:hint="@string/infoTelefone"
+        app:layout_constraintEnd_toEndOf="@+id/editPassword"
+        app:layout_constraintStart_toStartOf="@+id/editPassword"
+        app:layout_constraintTop_toBottomOf="@+id/editPassword" />
 
 
 </android.support.constraint.ConstraintLayout>

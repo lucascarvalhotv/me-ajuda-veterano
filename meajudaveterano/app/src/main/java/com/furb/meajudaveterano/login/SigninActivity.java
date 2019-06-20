@@ -38,6 +38,7 @@ public class SigninActivity extends AppCompatActivity {
     private EditText mEditUsername;
     private EditText mEditEmail;
     private EditText mEditPassword;
+    private EditText mEditTelefone;
     private Button mButtonCadastrar;
     private Button mButtonFoto;
     private Uri mSelectedUri;
@@ -53,6 +54,7 @@ public class SigninActivity extends AppCompatActivity {
         mEditUsername = findViewById(R.id.editUserName);
         mEditEmail = findViewById(R.id.editEmail);
         mEditPassword = findViewById(R.id.editPassword);
+        mEditTelefone = findViewById(R.id.editTelefone);
         mButtonCadastrar = findViewById(R.id.buttonCadastrar);
         mButtonFoto = findViewById(R.id.buttonSelectedPhoto);
         mImageViewFoto = findViewById(R.id.imageViewFoto);
@@ -157,7 +159,8 @@ public class SigninActivity extends AppCompatActivity {
                                     String profileUrl = uri.toString();
                                     String email = mEditEmail.getText().toString();
                                     uid = FirebaseAuth.getInstance().getUid();
-                                    usuario = new Usuario(uid, userName, profileUrl, email);
+                                    String telefone = mEditTelefone.getText().toString();
+                                    usuario = new Usuario(uid, userName, profileUrl, email, telefone);
                                 }
 
                                 FirebaseFirestore.getInstance().collection("usuario")
