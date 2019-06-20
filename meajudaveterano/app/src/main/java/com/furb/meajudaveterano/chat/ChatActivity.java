@@ -10,7 +10,6 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.furb.meajudaveterano.login.Contact;
 import com.furb.meajudaveterano.R;
 import com.furb.meajudaveterano.user.Usuario;
 import com.google.android.gms.tasks.OnFailureListener;
