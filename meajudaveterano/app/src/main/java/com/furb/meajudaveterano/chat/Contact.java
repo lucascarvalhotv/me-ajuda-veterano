@@ -1,4 +1,4 @@
-package com.furb.meajudaveterano.login;
+package com.furb.meajudaveterano.chat;
 
 public class Contact {
 
